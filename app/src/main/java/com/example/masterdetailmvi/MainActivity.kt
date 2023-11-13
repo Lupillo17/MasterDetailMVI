@@ -1,8 +1,7 @@
-package com.example.masterdetailmvi.presentation.main
+package com.example.masterdetailmvi
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.masterdetailmvi.R
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

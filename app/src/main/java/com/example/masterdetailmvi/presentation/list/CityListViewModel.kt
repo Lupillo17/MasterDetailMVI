@@ -1,4 +1,4 @@
-package com.example.masterdetailmvi.presentation.main
+package com.example.masterdetailmvi.presentation.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,38 +14,37 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class CityListViewModel @Inject constructor(
     private val cityRepository: CityRepository,
     private val navController: NavController
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<MainViewState>(MainViewState.Loading)
-    val state: StateFlow<MainViewState> get() = _state
+    private val _state = MutableStateFlow<CityListState>(CityListState.Loading)
+    val state: StateFlow<CityListState> get() = _state
 
-    fun processIntent(intent: MainIntent) {
+    fun processIntent(intent: CityListIntent) {
         when (intent) {
-            is MainIntent.LoadCities -> loadCities()
-            is MainIntent.CitySelected -> onCitySelected(intent.city)
+            is CityListIntent.LoadCities -> loadCities()
+            is CityListIntent.CitySelected -> onCitySelected(intent.city)
         }
     }
 
     private fun loadCities() {
-        _state.value = MainViewState.Loading
+        _state.value = CityListState.Loading
 
         viewModelScope.launch {
             try {
                 val cityDtos = cityRepository.getCities()
                 val cities = cityDtos.toDomainList()
-                _state.value = MainViewState.Success(cities)
+                _state.value = CityListState.Success(cities)
             } catch (e: Exception) {
-                _state.value = MainViewState.Error(e.message ?: "Error desconocido")
+                _state.value = CityListState.Error(e.message ?: "Error desconocido")
             }
         }
     }
 
     private fun onCitySelected(city: City) {
-//        val action = CityListFragmentDirections.actionCityListFragmentToCityDetailFragment(city)
-//        navController.navigate(action)
+        // navigate to 2nd screen
     }
 
 }
