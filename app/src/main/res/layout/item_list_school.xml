@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="school"
             type="com.example.masterdetailmvi.domain.model.School" />
@@ -22,18 +23,26 @@
 
             <TextView
                 android:id="@+id/name"
+                style="@style/TextAppearance.Material3.TitleMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
+                android:justificationMode="inter_word"
                 android:text="@{school.name}"
+                android:textAlignment="gravity"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="Clinton School Writers &amp; Artists, M.S. 260" />
 
             <TextView
                 android:id="@+id/description"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default_item_space"
+                android:ellipsize="end"
+                android:justificationMode="inter_word"
+                android:maxLines="4"
                 android:text="@{school.description}"
+                android:textAlignment="gravity"
                 app:layout_constraintTop_toBottomOf="@+id/name"
                 tools:text="Clinton School Writers description" />
 
