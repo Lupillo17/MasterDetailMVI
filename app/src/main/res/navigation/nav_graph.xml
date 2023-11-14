@@ -3,16 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/cityListFragment2">
+    app:startDestination="@id/schools_library_fragment">
 
     <fragment
-        android:id="@+id/cityListFragment2"
-        android:name="com.example.masterdetailmvi.presentation.list.CityListFragment"
-        android:label="CityListFragment"/>
+        android:id="@+id/schools_library_fragment"
+        android:name="com.example.masterdetailmvi.presentation.fragments.SchoolsLibraryFragment"
+        android:label="@string/cities_library"
+        tools:layout="@layout/fragment_schools_library">
+        <action
+            android:id="@+id/action_go_to_details"
+            app:destination="@id/school_details_fragment">
+            <argument
+                android:name="school_id"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+    </fragment>
 
     <fragment
-        android:id="@+id/cityDetailFragment"
-        android:name="com.example.masterdetailmvi.presentation.detail.CityDetailFragment"
-        android:label="fragment_city_detail"
-        tools:layout="@layout/fragment_city_detail" />
+        android:id="@+id/school_details_fragment"
+        android:name="com.example.masterdetailmvi.presentation.fragments.SchoolDetailsFragment"
+        android:label="@string/city_details"
+        tools:layout="@layout/fragment_school_details" >
+        <argument
+            android:name="school_id"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>
