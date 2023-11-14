@@ -3,15 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <data>
+
+        <variable
+            name="uiState"
+            type="com.example.masterdetailmvi.presentation.viewmodels.contracts.SchoolsLibraryContract.UiState" />
+
+        <variable
+            name="userEvent"
+            type="com.example.masterdetailmvi.presentation.viewmodels.contracts.SchoolsLibraryContract.UserEvent" />
+
+        <variable
+            name="adapter"
+            type="com.example.masterdetailmvi.presentation.fragments.adapters.SchoolsLibraryAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingHorizontal="@dimen/padding_default_horizontal"
-        android:paddingVertical="@dimen/padding_default_vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="3"
-        tools:listitem="@layout/list_item_school" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adapter="@{adapter}"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/padding_default_horizontal"
+            android:paddingVertical="@dimen/padding_default_vertical"
+            app:isVisible="@{!uiState.loading}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_list_school"
+            tools:visibility="visible" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:isVisible="@{uiState.loading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

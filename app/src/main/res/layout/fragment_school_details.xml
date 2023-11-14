@@ -3,12 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="uiState"
+            type="com.example.masterdetailmvi.presentation.viewmodels.contracts.SchoolDetailsContract.UiState" />
+        </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cityListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/padding_default_horizontal"
         android:paddingVertical="@dimen/padding_default_vertical"
+        app:isVisible="@{!uiState.loading}"
         tools:context=".presentation.fragments.SchoolDetailsFragment">
 
         <TextView
@@ -16,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
+            android:text="@{uiState.school.name}"
             tools:text="Clinton School Writers &amp; Artists, M.S. 260" />
 
         <TextView
@@ -23,8 +31,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_default_item_space"
+            android:text="@{uiState.school.description}"
             app:layout_constraintTop_toBottomOf="@+id/name"
             tools:text="Clinton School Writers description" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:isVisible="@{uiState.loading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

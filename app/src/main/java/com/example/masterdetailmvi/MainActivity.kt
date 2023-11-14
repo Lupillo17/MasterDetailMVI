@@ -27,5 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     fun goToDetails(id: String) {
         val action = SchoolsLibraryFragmentDirections.actionGoToDetails(schoolId = id)
+        navController.navigate(action)
     }
 }

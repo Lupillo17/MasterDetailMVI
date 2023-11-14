@@ -1,9 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+    id 'kotlinx-serialization'
 }
 
 android {
@@ -38,10 +41,6 @@ android {
         dataBinding true
         viewBinding true
     }
-
-    kapt {
-        correctErrorTypes true
-    }
 }
 
 dependencies {
@@ -64,14 +63,15 @@ dependencies {
 
     //hilt
     implementation "com.google.dagger:hilt-android:2.48"
-    kapt "com.google.dagger:hilt-compiler:2.48"
-    implementation 'androidx.hilt:hilt-navigation-compose:1.1.0'
+    ksp "com.google.dagger:hilt-compiler:2.48"
 
     //ktor
-    implementation "io.ktor:ktor-client-android:2.3.0"
-    implementation "io.ktor:ktor-client-json:2.3.0"
-    implementation "io.ktor:ktor-client-serialization:2.3.0"
-    implementation "io.ktor:ktor-client-core:2.3.0"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
+    implementation "io.ktor:ktor-client-logging:2.3.4"
+    implementation "io.ktor:ktor-client-content-negotiation:2.3.4"
+    implementation "io.ktor:ktor-client-okhttp:2.3.4"
+    implementation "io.ktor:ktor-serialization-kotlinx-json:2.3.4"
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0'
 
+    //paging
+    implementation 'androidx.paging:paging-runtime-ktx:3.2.1'
 }
