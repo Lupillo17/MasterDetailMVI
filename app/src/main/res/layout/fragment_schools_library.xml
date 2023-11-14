@@ -10,10 +10,6 @@
             type="com.example.masterdetailmvi.presentation.viewmodels.contracts.SchoolsLibraryContract.UiState" />
 
         <variable
-            name="userEvent"
-            type="com.example.masterdetailmvi.presentation.viewmodels.contracts.SchoolsLibraryContract.UserEvent" />
-
-        <variable
             name="adapter"
             type="com.example.masterdetailmvi.presentation.fragments.adapters.SchoolsLibraryAdapter" />
     </data>
