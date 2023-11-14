@@ -8,8 +8,7 @@
     <fragment
         android:id="@+id/cityListFragment2"
         android:name="com.example.masterdetailmvi.presentation.list.CityListFragment"
-        android:label="CityListFragment"
-        tools:layout="@layout/fragment_city_list"/>
+        android:label="CityListFragment"/>
 
     <fragment
         android:id="@+id/cityDetailFragment"

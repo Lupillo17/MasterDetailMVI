@@ -15,8 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CityListViewModel @Inject constructor(
-    private val cityRepository: CityRepository,
-    private val navController: NavController
+    private val cityRepository: CityRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<CityListState>(CityListState.Loading)
