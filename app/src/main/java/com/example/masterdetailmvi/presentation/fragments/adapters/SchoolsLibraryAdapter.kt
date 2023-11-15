@@ -24,6 +24,7 @@ class SchoolsLibraryAdapter(
 
     override fun onBindViewHolder(holder: SchoolLibraryViewHolder, position: Int) {
         getItem(position)?.let { school ->
+            holder.setIsRecyclable(false)
             holder.render(
                 onSchoolClicked = onSchoolClicked,
                 school = school
