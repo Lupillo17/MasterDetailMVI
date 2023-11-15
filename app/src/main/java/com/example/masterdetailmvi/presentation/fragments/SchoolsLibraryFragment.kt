@@ -1,12 +1,15 @@
 package com.example.masterdetailmvi.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.example.masterdetailmvi.R
 import com.example.masterdetailmvi.databinding.FragmentSchoolsLibraryBinding
 import com.example.masterdetailmvi.presentation.fragments.adapters.SchoolsLibraryAdapter
 import com.example.masterdetailmvi.presentation.viewmodels.SchoolsLibraryViewModel
@@ -26,18 +29,10 @@ class SchoolsLibraryFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setUpActionBar()
+        setUpAdapter()
         binding = FragmentSchoolsLibraryBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        adapter = SchoolsLibraryAdapter(
-            onSchoolClicked = { schoolId ->
-                schoolsLibraryViewModel.handleUserEvent(
-                    userEvent = SchoolsLibraryContract.UserEvent.OnSchoolClicked(
-                        activity = activity,
-                        schoolId = schoolId
-                    )
-                )
-            }
-        )
         binding.adapter = adapter
         return binding.root
     }
@@ -53,5 +48,22 @@ class SchoolsLibraryFragment: Fragment() {
             }
         }
         schoolsLibraryViewModel.loadData()
+    }
+
+    private fun setUpActionBar() {
+        requireActivity().title = getString(R.string.schools_library)
+    }
+
+    private fun setUpAdapter() {
+        adapter = SchoolsLibraryAdapter(
+            onSchoolClicked = { schoolId ->
+                schoolsLibraryViewModel.handleUserEvent(
+                    userEvent = SchoolsLibraryContract.UserEvent.OnSchoolClicked(
+                        navController = findNavController(),
+                        schoolId = schoolId
+                    )
+                )
+            }
+        )
     }
 }

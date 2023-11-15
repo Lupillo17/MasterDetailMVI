@@ -5,14 +5,13 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.masterdetailmvi.MainActivity
-import com.example.masterdetailmvi.domain.model.School
 import com.example.masterdetailmvi.domain.services.ISchool
+import com.example.masterdetailmvi.presentation.fragments.SchoolsLibraryFragmentDirections
 import com.example.masterdetailmvi.presentation.mvi.BaseViewModel
 import com.example.masterdetailmvi.presentation.utils.SchoolsPagingSource
+import com.example.masterdetailmvi.presentation.viewmodels.contracts.SchoolsLibraryContract.SideEffect
 import com.example.masterdetailmvi.presentation.viewmodels.contracts.SchoolsLibraryContract.UiState
 import com.example.masterdetailmvi.presentation.viewmodels.contracts.SchoolsLibraryContract.UserEvent
-import com.example.masterdetailmvi.presentation.viewmodels.contracts.SchoolsLibraryContract.SideEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
@@ -31,7 +30,11 @@ class SchoolsLibraryViewModel @Inject constructor(
     override fun handleUserEvent(userEvent: UserEvent) {
         when (userEvent) {
             is UserEvent.OnSchoolClicked -> {
-                (userEvent.activity as? MainActivity)?.goToDetails(id = userEvent.schoolId)
+                val action = SchoolsLibraryFragmentDirections
+                    .actionGoToDetails(
+                        schoolId = userEvent.schoolId
+                    )
+                userEvent.navController.navigate(action)
             }
         }
     }

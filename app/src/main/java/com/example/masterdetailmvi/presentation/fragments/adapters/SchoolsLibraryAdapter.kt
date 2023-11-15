@@ -24,10 +24,10 @@ class SchoolsLibraryAdapter(
 
     override fun onBindViewHolder(holder: SchoolLibraryViewHolder, position: Int) {
         getItem(position)?.let { school ->
-            holder.render(school = school)
-            holder.itemView.setOnClickListener {
-                onSchoolClicked.invoke(school.id)
-            }
+            holder.render(
+                onSchoolClicked = onSchoolClicked,
+                school = school
+            )
         }
     }
 
@@ -35,8 +35,14 @@ class SchoolsLibraryAdapter(
     inner class SchoolLibraryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding: ItemListSchoolBinding? = DataBindingUtil.bind(view)
 
-        fun render(school: School) {
-            binding?.school = school
+        fun render(
+            onSchoolClicked: (String) -> Unit,
+            school: School
+        ) {
+            binding?.let {
+                it.cardView.setOnClickListener { onSchoolClicked.invoke(school.id) }
+                it.school = school
+            }
         }
     }
 }
